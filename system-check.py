@@ -3,7 +3,7 @@ import os
 import requests
 
 # List of servers
-servers = ["172.28.40.18" "172.28.40.38" "172.28.40.43"]
+servers = ["172.28.40.18", "172.28.40.38", "172.28.40.43"]
 
 # Define output directory
 output_dir = "reports"
@@ -51,7 +51,16 @@ for server in servers:
     top_processes = run_ssh_command(server, "ps aux --sort=-%mem | head -n 8").strip()
     last_users = run_ssh_command(server, "last -n 7").strip()
     patch_date = run_ssh_command(server, "rpm -q --last kernel | head -n 1").strip()
-    updated_packages = run_ssh_command(server, f"rpm -qa --last | grep '{patch_date.split()[2]} {patch_date.split()[3]} {patch_date.split()[4]}'").strip()
+
+    # Add error handling for patch_date
+    updated_packages = "No patch date found."
+    if patch_date:
+        patch_date_parts = patch_date.split()
+        if len(patch_date_parts) >= 5:
+            patch_date_str = f"{patch_date_parts[2]} {patch_date_parts[3]} {patch_date_parts[4]}"
+            updated_packages = run_ssh_command(server, f"rpm -qa --last | grep '{patch_date_str}'").strip()
+        else:
+            updated_packages = "Patch date format is unexpected."
 
     # Check firewall rules if active
     if firewall_active == "active":
@@ -105,7 +114,7 @@ for server in servers:
     with open(output_file, "r") as file:
         report_content = file.read()
     response = requests.post(
-        "YOUR_SLACK_WEBHOOK_URL",
+        "https://hooks.slack.com/services/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",
         headers={"Content-type": "application/json"},
         json={"text": report_content}
     )
