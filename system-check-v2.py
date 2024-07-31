@@ -14,7 +14,7 @@ username = "afernandez"
 ssh_key_path = "/root/.ssh/id_rsa"  # Update with your SSH private key path
 
 # Slack webhook URL
-slack_webhook_url = "https://hooks.slack.com/services/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"  # Replace with your actual Slack webhook URL
+slack_webhook_url = Y"  # Replace with your actual Slack webhook URL
 
 # Function to run commands on a remote server via SSH
 def run_ssh_command(server, command):
