@@ -35,7 +35,7 @@ def send_file_to_slack(file_path, channel="#general"):
     with open(file_path, "rb") as file_content:
         response = requests.post(
             "https://slack.com/api/files.upload",
-            headers={"Authorization": f"Bearer YOUR_SLACK_TOKEN"},  # Replace with your Slack token
+            headers={"Authorization": f"Bearer SLACK_TOKEN"},  # Replace with your Slack token
             files={"file": file_content},
             data={"channels": channel, "filename": os.path.basename(file_path), "title": os.path.basename(file_path)}
         )
