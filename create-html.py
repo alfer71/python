@@ -4,9 +4,9 @@ from datetime import datetime
 
 # Define paths
 date_str = datetime.now().strftime('%Y-%m-%d')
-date_directory = f'/tmp/html-report/{date_str}'
-index_file_path = '/tmp/html-report/index.html'
-dest_path = '/shared/html-report'
+date_directory = f'/tmp/html-report/prcc/{date_str}'
+index_file_path = '/tmp/html-report/prcc/index.html'
+dest_path = '/shared/html-report/prcc'
 
 # Get list of HTML files
 html_files = [f for f in os.listdir(date_directory) if f.endswith('.html')]
@@ -24,8 +24,8 @@ index_content += "</ul>\n</body></html>"
 with open(index_file_path, 'w') as index_file:
     index_file.write(index_content)
 
-# Copy the directory and files from /tmp/html-report/ to /shared/html-report/
-shutil.copytree('/tmp/html-report', '/shared/html-report', dirs_exist_ok=True)
+# Copy the directory and files from /tmp/html-report/prcc/ to /shared/html-report/prcc/
+shutil.copytree('/tmp/html-report/prcc', '/shared/html-report/prcc', dirs_exist_ok=True)
 
 print(f'Index file created at: {index_file_path}')
 print(f'Files copied from {date_directory} to {dest_path}')
