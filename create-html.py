@@ -13,7 +13,7 @@ html_files = [f for f in os.listdir(date_directory) if f.endswith('.html')]
 
 # Create index.html content
 index_content = "<html><body>\n"
-index_content += f"<h1>PRCC non-prod Servers HTML Report for {date_str}</h1>\n<ul>\n"
+index_content += f"<h1>UHART non-prod Servers HTML Report for {date_str}</h1>\n<ul>\n"
 
 for html_file in html_files:
     index_content += f'<li><a href="{date_str}/{html_file}">{html_file}</a></li>\n'
