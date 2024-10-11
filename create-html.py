@@ -4,16 +4,16 @@ from datetime import datetime
 
 # Define paths
 date_str = datetime.now().strftime('%Y-%m-%d')
-date_directory = f'/tmp/html-report/prcc/{date_str}'
-index_file_path = '/tmp/html-report/prcc/index.html'
-dest_path = '/shared/html-report/prcc'
+date_directory = f'/tmp/html-report/uhart/{date_str}'
+index_file_path = '/tmp/html-report/uhart/index.html'
+dest_path = '/shared/html-report/uhart'
 
 # Get list of HTML files
 html_files = [f for f in os.listdir(date_directory) if f.endswith('.html')]
 
 # Create index.html content
 index_content = "<html><body>\n"
-index_content += f"<h1>UHART non-prod Servers HTML Report for {date_str}</h1>\n<ul>\n"
+index_content += f"<h1>UHART Prod Servers HTML Report for {date_str}</h1>\n<ul>\n"
 
 for html_file in html_files:
     index_content += f'<li><a href="{date_str}/{html_file}">{html_file}</a></li>\n'
@@ -24,8 +24,8 @@ index_content += "</ul>\n</body></html>"
 with open(index_file_path, 'w') as index_file:
     index_file.write(index_content)
 
-# Copy the directory and files from /tmp/html-report/prcc/ to /shared/html-report/prcc/
-shutil.copytree('/tmp/html-report/prcc', '/shared/html-report/prcc', dirs_exist_ok=True)
+# Copy the directory and files from /tmp/html-report/uhart/ to /shared/html-report/uhart/
+shutil.copytree('/tmp/html-report/uhart', '/shared/html-report/uhart', dirs_exist_ok=True)
 
 print(f'Index file created at: {index_file_path}')
 print(f'Files copied from {date_directory} to {dest_path}')
